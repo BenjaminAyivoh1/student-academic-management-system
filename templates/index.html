@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Academic Management System</title>
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="navbar">
+
+        <a href="/">Home</a>
+
+        <a href="/add_student">Add Student</a>
+
+        <a href="/view_students">View Students</a>
+
+        <a href="/search_student">Search Student</a>
+
+        <a href="/about">About</a>
+
+    </div>
+
+    <h1>Student Academic Management System</h1>
+    <p style="text-align:center; margin-bottom:30px;">
+    Manage student records efficiently using Flask and SQLite.
+    </p>
+
+    <h2>Dashboard</h2>
+
+    <div class="dashboard">
+
+        <div class="card">
+            <h3>Total Students</h3>
+            <p class="counter">
+                {{ total_students }}
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Average GPA</h3>
+            <p class="counter">
+                {{ average_gpa }}
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Highest GPA</h3>
+            <p class="counter">
+                {{ highest_gpa }}
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const counters = document.querySelectorAll(".counter");
+
+counters.forEach(counter => {
+
+    const target = parseFloat(counter.innerText);
+
+    let count = 0;
+
+    const updateCounter = () => {
+
+        count += target / 40;
+
+        if (count < target) {
+
+            if (target % 1 !== 0) {
+                counter.innerText = count.toFixed(2);
+            } else {
+                counter.innerText = Math.floor(count);
+            }
+
+            requestAnimationFrame(updateCounter);
+
+        } else {
+
+            counter.innerText = target;
+        }
+    };
+
+    updateCounter();
+});
+
+</script>
+
+</body>
+</html>
